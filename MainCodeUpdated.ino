@@ -15,6 +15,7 @@ unsigned long int milli_time;    //variable to hold the time
 int x = 0;
 int count = 0;
 boolean onoff == FALSE;
+#define RELAY 4;
 
 void setup() {
   //Intialize I2C ports
@@ -101,7 +102,7 @@ void loop() {
       Serial.print(",");
   Serial.println(temp_pixels[15]);  
 
-
+count = 0;
   for (int x = 0; x < 16; x++)
   {
     if (temp_pixels[x] >= 25 && temp_pixels[x] <= 35)
@@ -112,18 +113,13 @@ void loop() {
 
   if (count >= 4)
   {
-    onoff == TRUE;
-  }
-
-  if (onoff == TRUE)
-  {
-    digitalWrite(13, HIGH);
+    digitalWrite(RELAY, HIGH);
     delay (60000);              //delay 1 minute, light turns on for 1 minute
   }
 
    else
   {
-    digitalWrite (13, LOW);
+    digitalWrite (RELAY, LOW);
   }
 
     delay(100);                    //Take samples every tenth of a second
